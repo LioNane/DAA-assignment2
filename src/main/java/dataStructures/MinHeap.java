@@ -1,15 +1,24 @@
-package DataStructures;
+package dataStructures;
+
+import metrics.Metrics;
 
 public class MinHeap {
     private int[] data;
     private int size;
+    Metrics metrics;
 
-    public MinHeap() {
-        data = new int[10];
-        size = 0;
+    public MinHeap(Metrics metrics) {
+        this.data = new int[10];
+        this.size = 0;
+        this.metrics = metrics;
     }
 
-    public static void swap(int[] array, int i, int j) {
+    public void swap(int[] array, int i, int j) {
+        metrics.incrementSteps();
+        metrics.incrementSteps();
+        metrics.incrementMoves();
+        metrics.incrementMoves();
+        metrics.incrementMoves();
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
@@ -31,6 +40,10 @@ public class MinHeap {
         int parent_index = getParentIndex(index);
 
         while (index > 0 && data[index] < data[parent_index]){
+            metrics.incrementSteps();
+            metrics.incrementSteps();
+            metrics.incrementComparisons();
+
             swap(data, index, parent_index);
             index = parent_index;
             parent_index = getParentIndex(index);
@@ -45,9 +58,18 @@ public class MinHeap {
 
         while (left_child_index < size){
             minIndex = left_child_index;
-            if (right_child_index < size && data[right_child_index] < data[minIndex]){
-                minIndex = right_child_index;
+            if (right_child_index < size){
+                metrics.incrementSteps();
+                metrics.incrementSteps();
+                metrics.incrementComparisons();
+                if (data[right_child_index] < data[minIndex]){
+                    minIndex = right_child_index;
+                }
             }
+
+            metrics.incrementSteps();
+            metrics.incrementSteps();
+            metrics.incrementComparisons();
             if (data[index] <= data[minIndex]){
                 break;
             } else {
@@ -71,6 +93,8 @@ public class MinHeap {
             grow();
         }
 
+        metrics.incrementSteps();
+        metrics.incrementMoves();
         data[size] = x;
 
         bubbleUp(size);
@@ -90,6 +114,9 @@ public class MinHeap {
             throw new IllegalStateException("Heap is empty");
         }
 
+        metrics.incrementSteps();
+        metrics.incrementSteps();
+        metrics.incrementMoves();
         int temp_min = data[0];
         data[0] = data[size - 1];
         size--;
