@@ -88,7 +88,7 @@ public class MinHeap {
         data = new_data;
     }
 
-    private void insert(int x){
+    public void insert(int x){
         if (size >= data.length){
             grow();
         }
@@ -120,6 +120,8 @@ public class MinHeap {
         int temp_min = data[0];
         data[0] = data[size - 1];
         size--;
+
+        bubbleDown(0);
         return temp_min;
     }
 

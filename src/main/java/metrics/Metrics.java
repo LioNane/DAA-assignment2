@@ -41,8 +41,8 @@ public class Metrics {
         endTime = System.nanoTime();
     }
 
-    public long getTimeMs(){
-        return endTime - startTime;
+    public double getTimeMs(){
+        return (endTime - startTime) / 1000000.0;
     }
 
     public void reset(){
