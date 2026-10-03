@@ -94,7 +94,7 @@ public class MyLinkedList {
             metrics.incrementMoves();
             metrics.incrementMoves();
 
-            newNode.next = current.next;
+            newNode.next = current;
             newNode.prev = current.prev;
 
             metrics.incrementMoves();
